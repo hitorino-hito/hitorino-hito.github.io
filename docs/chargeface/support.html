@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChargeFace サポート</title>
+<meta name="description" content="ChargeFace のよくある質問とお問い合わせのページです。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="support.html">ChargeFace</a></div></header>
+<main>
+<div class="wrap">
+<h1>ChargeFace サポート</h1>
+<p class="lead">ChargeFace は、電池の残量と充電の状態でキャラクターの表情が変わるアプリです。</p>
+
+<h2>ウィジェットの表情がすぐに変わらないとき</h2>
+<p>iOS では、アプリが動いていない間に電池の変化を受け取る仕組みがありません。ショートカット App に自動化を 3 つ登録すると、充電器の抜き差し・残量の低下・満充電が数秒で反映されます。手順は、アプリの設定にある「ウィジェットをすぐ更新する」をご覧ください。登録していない場合も、ウィジェットは通常 1 時間ほどで追いつきます（iOS の判断で遅れることがあります）。登録している場合も、それ以外の残量の変化（例えば約85%から約80%）は、iOS がウィジェットの更新の回数を制限しているため、最長で 1 時間ほど遅れて反映されます。アプリを開くと、すぐにそろいます。</p>
+
+<h2>残量に「約」が付くのはなぜですか</h2>
+<p>iOS 17 以降、アプリが読み取れる電池の残量は 5% 単位です。そのため、ステータスバーの値と少し違うことがあり、「約」を付けて表示しています。残量低下の通知は、ショートカットの自動化を登録していれば、設定した残量を下回った時点で届きます。</p>
+
+<h2>残量低下の通知が届かないとき</h2>
+<p>ショートカット App に、残量の低下の自動化（アクション「ChargeFace：残量の低下」）を登録してください。登録していない場合は、iOS がアプリに時々与える更新の機会に判定するため、遅れたり、低電力モードの間は届かなかったりします。</p>
+
+<h2>充電開始・満充電の通知が届かないとき</h2>
+<p>この 2 つの通知は、それぞれのショートカットの自動化（アクション「ChargeFace：充電器の変化」と「ChargeFace：満充電」）が実行されたときに届きます。自動化の登録と、iOS の設定で ChargeFace の通知が許可されていることをご確認ください。充電の上限（80% など）を設定している場合は、満充電にならないため、満充電の通知が届かないことがあります。</p>
+
+<h2>集中モードの間に通知が届かないとき</h2>
+<p>集中モードの間や、時刻指定要約を使っているときは、通知が遅れて届くことがあります。すぐに受け取りたいときは、設定 App の集中モードで ChargeFace を通知を許可する App に加え、設定 App の「通知」→「時刻指定要約」で ChargeFace をオフにしてください。</p>
+
+<h2>広告が出ないとき</h2>
+<p>通信状況や広告の在庫によって、広告が出ないことがあります。時間をおいてお試しください。</p>
+
+<h2 id="contact">お問い合わせ</h2>
+<p>不具合のご報告やご意見は、次のフォームからお送りください。個別の返信はしていません。氏名や連絡先などは書かないでください。</p>
+<ul class="links">
+<li><a href="https://docs.google.com/forms/d/e/1FAIpQLScb40uAxw6Ddx3sLKixMfcvEhE2ZQYcZt8WwVrwt9RCU8mhPA/viewform" data-form="contact" rel="noopener noreferrer">お問い合わせのフォーム</a></li>
+</ul>
+
+<p class="after-links"><a href="privacy.html">プライバシーポリシーはこちら</a>、<a href="tokushoho.html">特定商取引法に基づく表記はこちら</a>です。表記の所在地と電話番号のご請求は、表記のページの専用のフォームからお送りください。</p>
+</div>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<ul>
+<li><a href="privacy.html">プライバシーポリシー</a></li>
+<li><a href="support.html">サポート</a></li>
+<li><a href="tokushoho.html">特定商取引法に基づく表記</a></li>
+</ul>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,165 @@
+/* ChargeFace 開発者サイトの共通の見た目。外部の読み込み（Web フォント・画像・スクリプト）は使わない */
+:root {
+  color-scheme: light dark;
+  --ink: #2A2225;
+  --muted: #6E676B;
+  --bg: #F7F8F4;
+  --card: #FFFFFF;
+  --line: #E3E2DD;
+  --accent: #2F7A3D; /* 背景 --bg の上で 4.96:1（本文中のリンクの 4.5:1 を満たす） */
+  --accent-ink: #FFFFFF;
+  --pending-bg: #FBF3E3;
+  --pending-ink: #6B4A12;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #EEEAE8;
+    --muted: #B5ADB1;
+    --bg: #1C1819;
+    --card: #282224;
+    --line: #3D3538;
+    --accent: #7CC98A;
+    --accent-ink: #13200F;
+    --pending-bg: #3A2F1A;
+    --pending-ink: #F2D9A6;
+  }
+}
+@media (prefers-contrast: more) {
+  :root { --muted: var(--ink); }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  line-break: strict;
+}
+
+.wrap {
+  max-width: 40rem; /* 1 行がおよそ 35〜38 字 */
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.site-header {
+  border-bottom: 2px solid var(--line);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  min-height: 3.5rem;
+}
+.brand {
+  font-weight: 800;
+  font-size: 1.125rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand:hover { text-decoration: underline; }
+
+main { padding: 2rem 0 2.5rem; }
+
+h1 {
+  font-size: 1.625rem;
+  line-height: 1.4;
+  margin: 0 0 1.25rem;
+  letter-spacing: 0.02em;
+}
+h1, h2 { word-break: auto-phrase; text-wrap: balance; }
+h2 {
+  font-size: 1.1875rem;
+  line-height: 1.5;
+  margin: 2rem 0 0.5rem;
+}
+p { margin: 0 0 1rem; }
+
+.lead { font-size: 1.125rem; }
+
+a { color: var(--accent); text-underline-offset: 0.15em; }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+.links {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border: 2px solid var(--line);
+  border-radius: 1rem;
+  background: var(--card);
+}
+.after-links { margin-top: 2rem; }
+.links li + li { border-top: 2px solid var(--line); }
+.links a {
+  display: block;
+  padding: 0.9rem 1.1rem;
+  min-height: 3rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: 0;
+}
+/* 一覧の角の丸み（枠の内側の丸み）。overflow: hidden で切らないため、先頭と末尾の項目に付ける */
+.links li:first-child a {
+  border-top-left-radius: calc(1rem - 2px);
+  border-top-right-radius: calc(1rem - 2px);
+}
+.links li:last-child a {
+  border-bottom-left-radius: calc(1rem - 2px);
+  border-bottom-right-radius: calc(1rem - 2px);
+}
+/* フォーカスの枠は項目の内側に描く（隣の項目や一覧の枠に重ならないため） */
+.links a:focus-visible { outline-offset: -3px; }
+/* 飾りの「›」は読み上げない（代替テキストを空にする。対応していないブラウザーは前の宣言を使う） */
+.links a::after { content: " ›"; content: " ›" / ""; color: var(--muted); }
+.links a:hover { background: var(--bg); }
+
+/* 特定商取引法に基づく表記の項目 */
+.terms { margin: 0; padding: 0; }
+.terms > div {
+  padding: 0.9rem 0;
+  border-top: 2px solid var(--line);
+}
+.terms > div:last-child { border-bottom: 2px solid var(--line); }
+.terms dt { font-weight: 700; margin: 0 0 0.2rem; }
+.terms dd { margin: 0; }
+@media (min-width: 40rem) {
+  .terms > div { display: grid; grid-template-columns: 12.5rem 1fr; gap: 1rem; }
+  .terms dt { margin: 0; }
+}
+
+.date { color: var(--muted); margin-top: 2rem; }
+
+/* 公開前に差し替える箇所（check_site.py が一覧にする） */
+.pending {
+  background: var(--pending-bg);
+  color: var(--pending-ink);
+  padding: 0 0.25em;
+  border-radius: 0.25em;
+}
+
+.site-footer {
+  border-top: 2px solid var(--line);
+  color: var(--muted);
+  font-size: 1rem;
+}
+.site-footer .wrap { padding-top: 1.25rem; padding-bottom: 2rem; }
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+}
+.site-footer a { color: var(--muted); }
