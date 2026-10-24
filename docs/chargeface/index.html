@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChargeFace - 表情が変わるバッテリー残量ウィジェット</title>
+<meta name="description" content="ChargeFace は、iPhone の電池残量と充電の状態に合わせて、キャラクターの表情が変わるアプリです。ホーム画面・ロック画面・スタンバイのウィジェットと、満充電・残量低下のお知らせに対応しています。無料。">
+<link rel="canonical" href="https://hitorino-hito.github.io/chargeface/">
+<meta name="apple-itunes-app" content="app-id=6824164964">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ChargeFace">
+<meta property="og:title" content="ChargeFace - 表情が変わるバッテリー残量ウィジェット">
+<meta property="og:description" content="残量が減るとしょんぼり、充電するとごきげん。3 体のキャラクターから相棒を選べる、iPhone のバッテリー残量ウィジェットです。">
+<meta property="og:url" content="https://hitorino-hito.github.io/chargeface/">
+<meta property="og:image" content="https://hitorino-hito.github.io/chargeface/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="でんちくん・コンセねこが電池の残量に合わせて表情を変える画面と、ホーム画面のウィジェット">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css">
+<style>
+.hero { text-align: center; }
+.hero h1 { margin-bottom: 0.75rem; }
+.hero .lead {
+  text-align: start;
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+.cta { text-align: center; margin: 2.5rem 0 0; }
+.store-button {
+  display: inline-block;
+  margin: 0.75rem 0 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+.store-button:hover { background: var(--accent-hover); }
+.store-button:active { filter: brightness(0.9); }
+.store-button:focus-visible { border-radius: 999px; outline-offset: 3px; }
+.note { color: var(--muted); font-size: 0.9375rem; margin: 0; }
+.gallery {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1.75rem -1.25rem 0;
+  padding: 0.25rem 1.25rem 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+}
+.gallery:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; border-radius: 4px; } /* 狭い幅では端まで広がるため、枠を内側に描く */
+.gallery li { flex: 0 0 auto; scroll-snap-align: center; }
+.gallery img {
+  display: block;
+  width: 11.5rem;
+  height: auto;
+  border-radius: 1rem;
+}
+.scroll-hint { color: var(--muted); font-size: 0.875rem; text-align: center; margin: 0.25rem 0 0; }
+/* 広い画面では、本文の列から出して 7 枚を折り返して並べる（横のスクロールを無くす） */
+@media (min-width: 48rem) {
+  .gallery {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: visible;
+    width: min(74rem, 100vw - 2.5rem);
+    margin: 2rem 0 0;
+    padding: 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .gallery img { width: 9.25rem; }
+  .scroll-hint { display: none; }
+}
+.characters { list-style: none; margin: 0; padding: 0; }
+.characters li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+}
+.characters li + li { border-top: 2px solid var(--line); }
+/* 絵は黒い線画の透過 PNG のため、ダークモードでも明るい台に載せて輪郭を見せる */
+.characters img { flex: 0 0 auto; width: 5.5rem; height: 5.5rem; padding: 0.35rem; border-radius: 1rem; background: #F7F8F4; }
+.characters p { margin: 0; }
+.features { margin: 0; padding-left: 1.25rem; }
+.features li + li { margin-top: 0.5rem; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ChargeFace",
+  "operatingSystem": "iOS 17.0 以降",
+  "applicationCategory": "UtilitiesApplication",
+  "inLanguage": "ja",
+  "description": "iPhone の電池残量と充電の状態に合わせて、キャラクターの表情が変わるアプリです。",
+  "url": "https://hitorino-hito.github.io/chargeface/",
+  "downloadUrl": "https://apps.apple.com/jp/app/chargeface/id6824164964",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="./">ChargeFace</a></div></header>
+<main>
+<div class="wrap">
+<section class="hero">
+<h1>表情が変わる、バッテリー残量ウィジェット</h1>
+<p class="lead">ChargeFace は、iPhone のバッテリー（電池）の残量と充電の状態に合わせて、キャラクターの表情が変わるアプリです。残量が減るとしょんぼり、充電するとごきげん。ホーム画面やロック画面に置けば、残量がひと目で分かります。</p>
+<a class="store-button" href="https://apps.apple.com/jp/app/chargeface/id6824164964">App Store で無料ダウンロード</a>
+<p class="note">対応：iPhone（iOS 17.0 以降）／日本語のみ</p>
+</section>
+
+<ul class="gallery" role="list" tabindex="0" aria-label="アプリの画面（7 枚）">
+<li><img src="img/01-face.jpg" width="540" height="1174" alt="電池の残量で表情が変わる。でんちくんが約85%で落ち着いた表情をしているメイン画面" loading="lazy"></li>
+<li><img src="img/02-home.jpg" width="540" height="1174" alt="ホーム画面に置ける。小・中の 2 種類のウィジェット" loading="lazy"></li>
+<li><img src="img/03-low.jpg" width="540" height="1174" alt="残量が減るとしょんぼり。コンセねこが約15%でひげを落としているメイン画面" loading="lazy"></li>
+<li><img src="img/04-charging.jpg" width="540" height="1174" alt="充電するとごきげん。もちまるが充電中に喜んでいるメイン画面" loading="lazy"></li>
+<li><img src="img/05-lock.jpg" width="540" height="1174" alt="ロック画面にも置ける。時刻の上・丸型・長方形の 3 種類。スタンバイにも対応" loading="lazy"></li>
+<li><img src="img/06-notify.jpg" width="540" height="1174" alt="残量低下のお知らせ（通知）。充電開始・満充電にも対応。iOS の仕組み上、遅れて届くことがあります" loading="lazy"></li>
+<li><img src="img/07-choose.jpg" width="540" height="1174" alt="3 体から相棒を選べる画面。何%で知らせるかも設定できる" loading="lazy"></li>
+</ul>
+<p class="scroll-hint" aria-hidden="true">横にスワイプすると、ほかの画面も見られます</p>
+
+<h2>3 体のキャラクター</h2>
+<ul class="characters">
+<li><img src="img/denchi.png" width="240" height="240" alt=""><p><strong>でんちくん</strong>：真面目な乾電池。業務連絡の口調で残量を報告します。</p></li>
+<li><img src="img/mochi.png" width="240" height="240" alt=""><p><strong>もちまる</strong>：のんびりしたおもち。残量が減ると焼けて膨らみ、充電中は頭から芽が出ます。</p></li>
+<li><img src="img/neko.png" width="240" height="240" alt=""><p><strong>コンセねこ</strong>：口の悪いねこ。残量が 20% を切ると、ひげが床に落ちます。</p></li>
+</ul>
+
+<h2>できること</h2>
+<ul class="features">
+<li>ホーム画面（小・中）、ロック画面（3 種類）、スタンバイのウィジェットで、残量とキャラクターの表情がひと目で分かります。</li>
+<li>充電の開始、満充電、残量の低下（5〜50% で設定）を、キャラクターの絵が付いた通知でお知らせします。ショートカット App などの設定は要りません。お知らせは、iOS の仕組み上、数十分から数時間遅れることがあります。</li>
+<li>アプリの画面でキャラクターをつつくと、場面ごとに違うせりふで反応します。</li>
+</ul>
+
+<h2>ご利用にあたって</h2>
+<ul class="features">
+<li>無料でお使いいただけます。アカウントの登録は不要で、電池の情報は端末の外に送信しません。</li>
+<li>キャラクターがときどき広告を見てほしいとお願いしますが、「また今度」で断れます。広告は、「広告を見る」などのボタンを押したときだけ流れる動画です。</li>
+<li>開発を応援するカンパ（任意の App 内課金）があります。カンパをしても、機能は変わりません。</li>
+<li>ウィジェットの更新も、iOS の仕組み上、遅れることがあります（通常は 1 時間ほどで追いつきます）。アプリを開くと、すぐに最新の状態になります。</li>
+<li>低電力モードの間や、設定 App の「Appのバックグラウンド更新」がオフのときは、お知らせが届かないことがあります。</li>
+<li>充電の上限（80% など）を設定しているときは、満充電のお知らせは届きません。充電器をつないですぐに外すと、充電を始めたときのお知らせが届かないことがあります。詳しくは<a href="support.html">サポート</a>をご覧ください。</li>
+</ul>
+
+<p class="cta"><a class="store-button" href="https://apps.apple.com/jp/app/chargeface/id6824164964">App Store で無料ダウンロード</a></p>
+</div>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<ul>
+<li><a href="privacy.html">プライバシーポリシー</a></li>
+<li><a href="support.html">サポート</a></li>
+<li><a href="tokushoho.html">特定商取引法に基づく表記</a></li>
+</ul>
+</div>
+</footer>
+</body>
+</html>
