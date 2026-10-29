@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>でんぐせ - 性格が変わるバッテリーウィジェット</title>
+<meta name="description" content="でんぐせ（旧名 ChargeFace）は、iPhone の電池の残量と充電の状態でキャラクターの表情が変わり、充電のくせで性格も変わるアプリです。ホーム画面・ロック画面・スタンバイのウィジェットと、満充電・残量低下のお知らせ（iOS の仕組み上、遅れることがあります）に対応しています。無料です。">
+<link rel="canonical" href="https://hitorino-hito.github.io/denguse/">
+<meta name="apple-itunes-app" content="app-id=6824164964">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="でんぐせ">
+<meta property="og:title" content="でんぐせ - 性格が変わるバッテリーウィジェット">
+<meta property="og:description" content="充電のしかたで、キャラクターの性格が変わります。残量が減るとしょんぼり、充電するとごきげん。3 体から相棒を選べる、iPhone のバッテリーウィジェットです。">
+<meta property="og:url" content="https://hitorino-hito.github.io/denguse/">
+<meta property="og:image" content="https://hitorino-hito.github.io/denguse/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="でんぐせのアイコン・名前・「性格が変わる バッテリーウィジェット」の言葉の横に、「充電のくせで性格が変わる」「ホーム画面に置ける」「くせ診断で性格が分かる」の 3 枚の画面を並べた画像">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css">
+<style>
+.hero { text-align: center; }
+.hero h1 { margin-bottom: 0.75rem; }
+.hero .lead {
+  text-align: start;
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+.cta { text-align: center; margin: 2.5rem 0 0; }
+.store-button {
+  display: inline-block;
+  margin: 0.75rem 0 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+.store-button:hover { background: var(--accent-hover); }
+.store-button:active { filter: brightness(0.9); }
+.store-button:focus-visible { border-radius: 999px; outline-offset: 3px; }
+.note { color: var(--muted); font-size: 0.9375rem; margin: 0; }
+.gallery {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1.75rem -1.25rem 0;
+  padding: 0.25rem 1.25rem 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+}
+.gallery:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; border-radius: 4px; } /* 狭い幅では端まで広がるため、枠を内側に描く */
+.gallery li { flex: 0 0 auto; scroll-snap-align: center; }
+.gallery img {
+  display: block;
+  width: 11.5rem;
+  height: auto;
+  border-radius: 1rem;
+}
+.scroll-hint { color: var(--muted); font-size: 0.875rem; text-align: center; margin: 0.25rem 0 0; }
+/* 広い画面では、本文の列から出して 8 枚を 4 枚ずつ 2 段に並べる（横のスクロールを無くす） */
+@media (min-width: 48rem) {
+  .gallery {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: visible;
+    width: min(46rem, 100vw - 2.5rem);
+    margin: 2rem 0 0;
+    padding: 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .gallery img { width: 10.5rem; }
+  .scroll-hint { display: none; }
+}
+.characters { list-style: none; margin: 0; padding: 0; }
+.characters li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+}
+.characters li + li { border-top: 2px solid var(--line); }
+/* 絵は黒い線画の透過 PNG のため、ダークモードでも明るい台に載せて輪郭を見せる */
+.characters img { flex: 0 0 auto; width: 5.5rem; height: 5.5rem; padding: 0.35rem; border-radius: 1rem; background: #F7F8F4; }
+.characters p { margin: 0; }
+.features { margin: 0; padding-left: 1.25rem; }
+.features li + li { margin-top: 0.5rem; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "でんぐせ",
+  "alternateName": "ChargeFace",
+  "operatingSystem": "iOS 17.0 以降",
+  "applicationCategory": "UtilitiesApplication",
+  "inLanguage": "ja",
+  "description": "iPhone の電池の残量と充電の状態でキャラクターの表情が変わり、充電のくせで性格も変わるアプリです。",
+  "url": "https://hitorino-hito.github.io/denguse/",
+  "downloadUrl": "https://apps.apple.com/jp/app/id6824164964",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+}
+</script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="./">でんぐせ</a></div></header>
+<main>
+<div class="wrap">
+<section class="hero">
+<h1>性格が変わる、バッテリーウィジェット</h1>
+<p class="lead">でんぐせ（電池＋くせ。旧名 ChargeFace）は、iPhone の電池の残量と充電の状態に合わせて、キャラクターの表情が変わるアプリです。残量が減るとしょんぼり、充電するとごきげん。充電のしかたのくせで、キャラクターの性格も変わります。ウィジェットをホーム画面やロック画面に置けば、充電のし忘れに気づけます。ウィジェットは、残量を数字ではなく、キャラクターの表情や、せりふ・ひとこと（どれが出るかは、ウィジェットの大きさによって異なります）で伝えます。</p>
+<a class="store-button" href="https://apps.apple.com/jp/app/id6824164964">App Store で無料ダウンロード</a>
+<p class="note">対応：iPhone（iOS 17.0 以降）／日本語のみ</p>
+</section>
+
+<ul class="gallery" role="list" tabindex="0" aria-label="アプリの画面（8 枚）">
+<li><img src="img/01-habit.jpg" width="540" height="1174" alt="充電のくせで性格が変わる。満充電でつなぎがちなら「ためこみ派」に。でんちくんの性格が「ためこみ派」、仲が「なかよし」と出たメイン画面" loading="lazy"></li>
+<li><img src="img/02-home.jpg" width="540" height="1174" alt="ホーム画面に置ける。数字ではなく、表情とせりふで伝える。でんちくんの小・中の 2 種類のウィジェット" loading="lazy"></li>
+<li><img src="img/03-checkup.jpg" width="540" height="1174" alt="くせ診断で性格が分かる。くせの強さと、電池にやさしい使い方。コンセねこの性格が「ギリギリ派」と出て、ためこみ・ギリギリ・こまめの 3 つのくせの強さを示す画面" loading="lazy"></li>
+<li><img src="img/04-low.jpg" width="540" height="1174" alt="残量が減るとしょんぼり。性格が「ギリギリ派」のコンセねこが、残量が少ないときにひげを落としているメイン画面" loading="lazy"></li>
+<li><img src="img/05-charging.jpg" width="540" height="1174" alt="充電するとごきげん。性格が「こまめ派」のもちまるが、充電中に喜んでいるメイン画面" loading="lazy"></li>
+<li><img src="img/06-lock.jpg" width="540" height="1174" alt="ロック画面にも置ける。時刻の上・丸型・長方形の 3 種類。スタンバイにも対応" loading="lazy"></li>
+<li><img src="img/07-notify.jpg" width="540" height="1174" alt="残量低下をお知らせ（通知）。充電開始・満充電にも対応。iOS の仕組み上、遅れて届く場合あり" loading="lazy"></li>
+<li><img src="img/08-choose.jpg" width="540" height="1174" alt="3 体から相棒を選べる。何%で知らせるかも設定できる。アプリの設定の画面" loading="lazy"></li>
+</ul>
+<p class="scroll-hint" aria-hidden="true">横にスワイプすると、ほかの画面も見られます</p>
+
+<h2>充電のくせで、性格が変わる</h2>
+<p>アプリとウィジェットが記録した充電のようすから、キャラクターの性格が決まります。性格は、アプリの画面と、せりふやひとことが出るウィジェットで、キャラクターの口調に表れます。</p>
+<ul class="features">
+<li><strong>ためこみ派</strong>：満充電のまま、充電器につないでおく時間が長いタイプ。</li>
+<li><strong>ギリギリ派</strong>：残量が少なくなるまで使ってから、充電することが多いタイプ。</li>
+<li><strong>こまめ派</strong>：残量が中くらいのうちに充電し、満充電の手前で外すことが多いタイプ。</li>
+<li><strong>バランス派</strong>：どのくせも目立たず、ほどよく充電しているタイプ。</li>
+</ul>
+<p>性格は、3 日分の記録がそろうと決まります（それまでは「観察中」です）。</p>
+<p>「充電のくせ診断」では、3 つのくせ（ためこみ・ギリギリ・こまめ）の強さと、電池にやさしい使い方のヒントを見られます。診断の結果は、画像で共有できます。くせ診断は、電池の劣化を調べるものではありません（電池の状態は、設定 App の「バッテリー」で確かめられます）。</p>
+<p>充電の回数に合わせて、キャラクターとの仲の段階も「はじめまして」から「なかよし」「あいぼう」「おおベテラン」へと進みます。</p>
+
+<h2>3 体のキャラクター</h2>
+<ul class="characters" role="list">
+<li><img src="img/denchi.png" width="240" height="240" alt=""><p><strong>でんちくん</strong>：真面目な乾電池。業務連絡の口調で残量を報告します。</p></li>
+<li><img src="img/mochi.png" width="240" height="240" alt=""><p><strong>もちまる</strong>：のんびりしたおもち。残量が減ると焼けて膨らみ、充電中は頭からコンセントの芽が出ます。</p></li>
+<li><img src="img/neko.png" width="240" height="240" alt=""><p><strong>コンセねこ</strong>：口の悪いねこ。残量が 20% を切ると、ひげが床に落ちます。</p></li>
+</ul>
+
+<h2>できること</h2>
+<ul class="features">
+<li>ホーム画面（小・中）、ロック画面（時刻の上・丸型・長方形）、スタンバイのウィジェットで、残量を数字ではなく、キャラクターの表情や、せりふ・ひとことで伝えます。数字を読まなくても、ひと目で充電の頃合いが分かります。せりふが出るのはホーム画面の中サイズ、ひとことが出るのはロック画面の「時刻の上」と「長方形」です。残量の数字は、iPhone のステータスバーとアプリの画面で見られます。残量低下のお知らせ（通知）にも出ることがあります。</li>
+<li>充電の開始、満充電、残量の低下（知らせる残量は 5〜50% で設定）を、キャラクターの絵が付いた通知でお知らせします。ショートカット App などの設定は要りません。お知らせは、iOS の仕組み上、数十分から数時間遅れることがあります。</li>
+<li>アプリの画面でキャラクターをつつくと、場面ごとに違うせりふで反応します。</li>
+</ul>
+
+<h2>ご利用にあたって</h2>
+<ul class="features">
+<li>無料でお使いいただけます。アカウントの登録は不要です。電池の残量と充電の記録は、端末の中だけで扱い、外部に送信しません。充電の記録は、くせ診断の画面でいつでも消せます。</li>
+<li>性格と診断の結果は、アプリとウィジェットが記録した充電のようすから推定したものです。電池の劣化の度合いを示すものではありません。</li>
+<li>キャラクターがときどき広告を見てほしいとお願いしますが、「また今度」で断れます。広告は、「広告を見る」などのボタンを押したときだけ流れる動画です。</li>
+<li>開発を応援するカンパ（任意のアプリ内課金）があります。カンパをしても、機能は変わりません。</li>
+<li>お知らせと同じく、ウィジェットの更新も、iOS の仕組み上、遅れることがあります（通常は 1 時間ほどで追いつきます）。アプリを開くと、すぐに最新の状態になります。</li>
+<li>低電力モードの間や、設定 App の「Appのバックグラウンド更新」がオフのときは、お知らせがほとんど届きません。当てはまるときは、アプリの設定に直し方を表示します。</li>
+<li>充電の上限（80% など）を設定しているときは、満充電のお知らせは届きません。充電器をつないですぐに外すと、充電を始めたときのお知らせが届かないことがあります。詳しくは<a href="support.html">サポート</a>をご覧ください。</li>
+</ul>
+
+<p class="cta"><a class="store-button" href="https://apps.apple.com/jp/app/id6824164964">App Store で無料ダウンロード</a></p>
+</div>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<nav aria-label="このサイトのページ">
+<ul role="list">
+<li><a href="./">でんぐせについて</a></li>
+<li><a href="privacy.html">プライバシーポリシー</a></li>
+<li><a href="support.html">サポート</a></li>
+<li><a href="tokushoho.html">特定商取引法に基づく表記</a></li>
+</ul>
+</nav>
+</div>
+</footer>
+</body>
+</html>
